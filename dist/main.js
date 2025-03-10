@@ -7,41 +7,41 @@ const { singleSpace, canvasWidth, canvasHeight, imagesPerSourceRow, imagesPerRen
 const SpriteSheet = document.createElement('img');
 const Player = document.createElement('img');
 SpriteSheet.src = '../images/spritesheet.png';
+const mainAnimationLoop = () => {
+    let idleCount = 0;
+    let realCount = 0;
+    tiles.layers.forEach(layer => {
+        layer.data.forEach((tile, index) => {
+            const sourceRow = Math.floor(tile / imagesPerSourceRow);
+            const sourceColumn = (tile % imagesPerSourceRow) - 1;
+            const displayRow = Math.floor(index / imagesPerRenderRow);
+            const displayColumn = index % imagesPerRenderRow;
+            context.drawImage(SpriteSheet, singleSpace * sourceColumn, singleSpace * sourceRow, singleSpace, singleSpace, singleSpace * displayColumn, singleSpace * displayRow, singleSpace, singleSpace);
+        });
+    });
+    const { x, y, singlePlayerSpace } = player;
+    const { frames, offset, animationDelay } = playerStates[player.playerState];
+    context.globalCompositeOperation = 'multiply';
+    context.fillStyle = "#ccc";
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+    context.fillStyle = `#${Number(3435973887 - Math.round(255 * (realCount / 60)) % 255).toString(16)}`;
+    context.beginPath();
+    context.arc(x + singlePlayerSpace - 10, y + singlePlayerSpace + 10, (realCount / 4) % 15 + 20, 0, 2 * Math.PI, false);
+    context.fill();
+    context.globalCompositeOperation = "source-over";
+    context.drawImage(Player, (idleCount % frames) * singlePlayerSpace, offset * singlePlayerSpace, singlePlayerSpace, singlePlayerSpace, x, y, singlePlayerSpace * 1.5, singlePlayerSpace * 1.5);
+    realCount++;
+    if (realCount % animationDelay === 0) {
+        idleCount++;
+    }
+    player.x += player.speedX;
+    player.y += player.speedY;
+    requestAnimationFrame(mainAnimationLoop);
+};
 SpriteSheet.addEventListener('load', () => {
     Player.src = '../images/shadow/player.png';
     Player.addEventListener('load', () => {
-        let idleCount = 0;
-        let realCount = 0;
-        const loop = () => {
-            tiles.layers.forEach(layer => {
-                layer.data.forEach((tile, index) => {
-                    const sourceRow = Math.floor(tile / imagesPerSourceRow);
-                    const sourceColumn = (tile % imagesPerSourceRow) - 1;
-                    const displayRow = Math.floor(index / imagesPerRenderRow);
-                    const displayColumn = index % imagesPerRenderRow;
-                    context.drawImage(SpriteSheet, singleSpace * sourceColumn, singleSpace * sourceRow, singleSpace, singleSpace, singleSpace * displayColumn, singleSpace * displayRow, singleSpace, singleSpace);
-                });
-            });
-            const { x, y, singlePlayerSpace } = player;
-            const { frames, offset, animationDelay } = playerStates[player.playerState];
-            context.globalCompositeOperation = 'multiply';
-            context.fillStyle = "#ccc";
-            context.fillRect(0, 0, canvasWidth, canvasHeight);
-            context.fillStyle = `#${Number(3435973887 - Math.round(255 * (realCount / 60)) % 255).toString(16)}`;
-            context.beginPath();
-            context.arc(x + singlePlayerSpace - 10, y + singlePlayerSpace + 10, (realCount / 4) % 15 + 20, 0, 2 * Math.PI, false);
-            context.fill();
-            context.globalCompositeOperation = "source-over";
-            context.drawImage(Player, (idleCount % frames) * singlePlayerSpace, offset * singlePlayerSpace, singlePlayerSpace, singlePlayerSpace, x, y, singlePlayerSpace * 1.5, singlePlayerSpace * 1.5);
-            realCount++;
-            if (realCount % animationDelay === 0) {
-                idleCount++;
-            }
-            player.x += player.speedX;
-            player.y += player.speedY;
-            requestAnimationFrame(loop);
-        };
-        loop();
+        mainAnimationLoop();
     });
 });
 addEventListener("keydown", (e) => {
