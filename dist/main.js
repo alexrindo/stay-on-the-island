@@ -45,6 +45,7 @@ SpriteSheet.addEventListener('load', () => {
     });
 });
 addEventListener("keydown", (e) => {
+    console.log({ code: e.code });
     switch (e.code) {
         case 'ArrowDown':
             player.speedY = player.verticalSpeed;
@@ -75,12 +76,16 @@ addEventListener("keydown", (e) => {
             player.playerState = 3;
             player.direction = 'back';
             break;
+        case 'Space':
+            player.speedY = 10;
+            break;
     }
 });
 addEventListener("keyup", (e) => {
     switch (e.code) {
         case 'ArrowDown':
         case 'ArrowUp':
+        case 'Space':
             player.speedY = 0;
         case 'ArrowRight':
         case 'ArrowLeft':

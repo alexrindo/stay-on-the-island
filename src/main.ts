@@ -75,13 +75,15 @@ const mainAnimationLoop = () => {
 
 SpriteSheet.addEventListener('load', () => {
   Player.src = '../images/shadow/player.png';
-  
+
   Player.addEventListener('load', () => {
     mainAnimationLoop();
   })
 })
 
 addEventListener("keydown", (e) => {
+    console.log({ code: e.code })
+
     switch(e.code) {
         case 'ArrowDown':
             player.speedY = player.verticalSpeed;
@@ -109,6 +111,9 @@ addEventListener("keydown", (e) => {
             player.playerState = 3;
             player.direction = 'back';
         break;
+        case 'Space':
+            player.speedY = 10;
+        break;
     }
 });
 
@@ -116,6 +121,7 @@ addEventListener("keyup", (e) => {
     switch(e.code) {
         case 'ArrowDown':
         case 'ArrowUp':
+        case 'Space':
             player.speedY = 0;
         case 'ArrowRight':
         case 'ArrowLeft':
