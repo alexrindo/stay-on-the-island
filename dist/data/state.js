@@ -60,6 +60,16 @@ export const playerStates = [{
         frames: 6,
         offset: 7,
         animationDelay: 6
+    }, {
+        label: 'dashForward',
+        frames: 10,
+        offset: 6,
+        animationDelay: 6
+    }, {
+        label: 'dashBackward',
+        frames: 10,
+        offset: 7,
+        animationDelay: 6
     }];
 export const canvasState = {
     singleSpace: 32,
