@@ -5,6 +5,7 @@ export const player = {
     y: 250,
     speedX: 0,
     speedY: 0,
+    jumpSpeed: 10,
     verticalSpeed: 5,
     horizontalSpeed: 5,
     direction: 'forward'
@@ -32,13 +33,23 @@ export const playerStates = [{
     animationDelay: 6
 }, {
     label: 'jumpForward',
-    frames: 8,
+    frames: 4,
     offset: 4,
     animationDelay: 6
 },  {
     label: 'jumpBackward',
-    frames: 8,
+    frames: 4,
     offset: 5,
+    animationDelay: 6
+}, {
+    label: 'fallForward',
+    frames: 4,
+    offset: 6,
+    animationDelay: 6
+},  {
+    label: 'fallBackward',
+    frames: 4,
+    offset: 7,
     animationDelay: 6
 }, {
     label: 'attackForward',

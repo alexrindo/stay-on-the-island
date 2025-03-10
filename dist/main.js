@@ -58,7 +58,6 @@ addEventListener("keydown", (e) => {
             break;
         case 'ArrowUp':
             player.speedY = -player.verticalSpeed;
-            ;
             if (player.direction === 'forward') {
                 player.playerState = 2;
             }
@@ -77,7 +76,13 @@ addEventListener("keydown", (e) => {
             player.direction = 'back';
             break;
         case 'Space':
-            player.speedY = 10;
+            player.speedY = -5;
+            if (player.direction === 'forward') {
+                player.playerState = 4;
+            }
+            else {
+                player.playerState = 5;
+            }
             break;
     }
 });
