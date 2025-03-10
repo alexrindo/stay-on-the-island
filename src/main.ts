@@ -86,6 +86,7 @@ addEventListener("keydown", (e) => {
 
     switch(e.code) {
         case 'ArrowDown':
+        case 'KeyS':
             player.speedY = player.verticalSpeed;
             if(player.direction === 'forward') {
                 player.playerState = 2;
@@ -94,6 +95,7 @@ addEventListener("keydown", (e) => {
             }
         break;
         case 'ArrowUp':
+        case 'KeyW':
             player.speedY = -player.verticalSpeed;
             if(player.direction === 'forward') {
                 player.playerState = 2;
@@ -102,11 +104,13 @@ addEventListener("keydown", (e) => {
             }
         break;
         case 'ArrowRight':
+        case 'KeyA':
             player.speedX = player.horizontalSpeed;
             player.playerState = 2;
             player.direction = 'forward';
         break;
         case 'ArrowLeft':
+        case 'KeyD':
             player.speedX = -player.horizontalSpeed;
             player.playerState = 3;
             player.direction = 'back';
