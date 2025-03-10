@@ -56,7 +56,7 @@ SpriteSheet.addEventListener('load', () => {
         context.drawImage(
             Player,
             (idleCount % frames) * singlePlayerSpace,
-            offset,
+            offset * singlePlayerSpace,
             singlePlayerSpace,
             singlePlayerSpace,
             x,

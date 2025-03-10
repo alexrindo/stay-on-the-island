@@ -32,7 +32,7 @@ SpriteSheet.addEventListener('load', () => {
             context.arc(x + singlePlayerSpace - 10, y + singlePlayerSpace + 10, (realCount / 4) % 15 + 20, 0, 2 * Math.PI, false);
             context.fill();
             context.globalCompositeOperation = "source-over";
-            context.drawImage(Player, (idleCount % frames) * singlePlayerSpace, offset, singlePlayerSpace, singlePlayerSpace, x, y, singlePlayerSpace * 1.5, singlePlayerSpace * 1.5);
+            context.drawImage(Player, (idleCount % frames) * singlePlayerSpace, offset * singlePlayerSpace, singlePlayerSpace, singlePlayerSpace, x, y, singlePlayerSpace * 1.5, singlePlayerSpace * 1.5);
             realCount++;
             if (realCount % animationDelay === 0) {
                 idleCount++;
