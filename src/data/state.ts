@@ -8,7 +8,8 @@ export const player = {
     jumpSpeed: 10,
     verticalSpeed: 5,
     horizontalSpeed: 5,
-    direction: 'forward'
+    direction: 'forward',
+    currentState: 'ground'
 }
 
 export const playerStates = [{
