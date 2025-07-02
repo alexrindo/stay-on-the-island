@@ -76,8 +76,8 @@ export const playerStates = [{
 
 export const canvasState = {
     singleSpace: 32,
-    canvasWidth: 576,
-    canvasHeight: 576,
-    imagesPerSourceRow: 20,
-    imagesPerRenderRow: 18
+    canvasWidth: 800,
+    canvasHeight: 630,
+    imagesPerSourceRow: 20, //Never changes
+    imagesPerRenderRow: 25
 }
