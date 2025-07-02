@@ -12,6 +12,10 @@ export const player = {
     currentState: 'ground'
 }
 
+export const inAccessibleTiles = [
+    33
+]
+
 export const playerStates = [{
     label: 'idleForward',
     frames: 12,

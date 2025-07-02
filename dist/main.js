@@ -34,8 +34,12 @@ const mainAnimationLoop = () => {
     if (realCount % animationDelay === 0) {
         idleCount++;
     }
-    player.x += player.speedX;
-    player.y += player.speedY;
+    let updatedX = player.x + player.speedX;
+    let updatedY = player.y + player.speedY;
+    if (checkForBorderCollisions(updatedX, updatedY)) {
+        player.x += player.speedX;
+        player.y += player.speedY;
+    }
     requestAnimationFrame(mainAnimationLoop);
 };
 SpriteSheet.addEventListener('load', () => {
@@ -44,6 +48,20 @@ SpriteSheet.addEventListener('load', () => {
         mainAnimationLoop();
     });
 });
+const checkForBorderCollisions = (xPostion, yPosition) => {
+    console.log({ xPostion }, { yPosition });
+    const border = {
+        top: -singleSpace,
+        left: -(singleSpace / 2),
+        right: canvasWidth - (singleSpace * 1.5),
+        bottom: canvasHeight - (singleSpace * 2)
+    };
+    const { top, left, right, bottom } = border;
+    if ((xPostion > right || yPosition > bottom) || (xPostion < left || yPosition < top)) {
+        return false;
+    }
+    return true;
+};
 addEventListener("keydown", (e) => {
     console.log({ code: e.code });
     switch (e.code) {
@@ -68,13 +86,13 @@ addEventListener("keydown", (e) => {
             }
             break;
         case 'ArrowRight':
-        case 'KeyA':
+        case 'KeyD':
             player.speedX = player.horizontalSpeed;
             player.playerState = 2;
             player.direction = 'forward';
             break;
         case 'ArrowLeft':
-        case 'KeyD':
+        case 'KeyA':
             player.speedX = -player.horizontalSpeed;
             player.playerState = 3;
             player.direction = 'back';
@@ -87,15 +105,21 @@ addEventListener("keydown", (e) => {
             else {
                 player.playerState = 5;
             }
+        case 'KeyQ':
+            player.playerState = 6;
             break;
     }
 });
 addEventListener("keyup", (e) => {
     switch (e.code) {
+        case 'KeyS':
+        case 'KeyW':
         case 'ArrowDown':
         case 'ArrowUp':
         case 'Space':
             player.speedY = 0;
+        case 'KeyA':
+        case 'KeyD':
         case 'ArrowRight':
         case 'ArrowLeft':
             player.speedX = 0;
